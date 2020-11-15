@@ -454,26 +454,28 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\PoomPui\\.nuget\\packages\\": {}
+    "/Users/Anawat/.nuget/packages/": {},
+    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ACP\\Web\\back\\HospitalAPI\\HospitalAPI\\HospitalAPI.csproj",
+      "projectUniqueName": "/Users/Anawat/Documents/pui/HospitalAPI/HospitalAPI/HospitalAPI.csproj",
       "projectName": "HospitalAPI",
-      "projectPath": "D:\\ACP\\Web\\back\\HospitalAPI\\HospitalAPI\\HospitalAPI.csproj",
-      "packagesPath": "C:\\Users\\PoomPui\\.nuget\\packages\\",
-      "outputPath": "D:\\ACP\\Web\\back\\HospitalAPI\\HospitalAPI\\obj\\",
+      "projectPath": "/Users/Anawat/Documents/pui/HospitalAPI/HospitalAPI/HospitalAPI.csproj",
+      "packagesPath": "/Users/Anawat/.nuget/packages/",
+      "outputPath": "/Users/Anawat/Documents/pui/HospitalAPI/HospitalAPI/obj/",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\PoomPui\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/Anawat/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -513,7 +515,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.301/RuntimeIdentifierGraph.json"
       }
     }
   }
