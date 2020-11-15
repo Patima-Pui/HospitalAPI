@@ -18,3 +18,10 @@ D:\ACP\Web\back\HospitalAPI\HospitalAPI\obj\Debug\netcoreapp3.1\staticwebassets\
 D:\ACP\Web\back\HospitalAPI\HospitalAPI\obj\Debug\netcoreapp3.1\HospitalAPI.dll
 D:\ACP\Web\back\HospitalAPI\HospitalAPI\obj\Debug\netcoreapp3.1\HospitalAPI.pdb
 D:\ACP\Web\back\HospitalAPI\HospitalAPI\obj\Debug\netcoreapp3.1\HospitalAPI.genruntimeconfig.cache
+D:\ACP\Web\back\HospitalAPI\HospitalAPI\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+D:\ACP\Web\back\HospitalAPI\HospitalAPI\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+D:\ACP\Web\back\HospitalAPI\HospitalAPI\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+D:\ACP\Web\back\HospitalAPI\HospitalAPI\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+D:\ACP\Web\back\HospitalAPI\HospitalAPI\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\ACP\Web\back\HospitalAPI\HospitalAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\ACP\Web\back\HospitalAPI\HospitalAPI\obj\Debug\netcoreapp3.1\HospitalAPI.csproj.CopyComplete

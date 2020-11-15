@@ -1,12 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System.Net;
-using System.Net.Http;
-
+using HospitalAPI.Services;
 
 namespace HospitalAPI.Controllers
 {
@@ -14,6 +9,13 @@ namespace HospitalAPI.Controllers
     [Route("[controller]")]
     public class UserInfoController : ControllerBase
     {
+        private readonly IUserService _userService;
+
+        public UserInfoController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
         [HttpGet]
         public UserModel Get()
         {
@@ -105,5 +107,13 @@ namespace HospitalAPI.Controllers
             return p;
         }
 
+        
+        [HttpGet]
+        [Route("TestConnectionDatabase")]
+        public string TestConnectionDatabase()
+        {
+            var result = _userService.SelectData();
+            return result;
+        }
     }
 }
