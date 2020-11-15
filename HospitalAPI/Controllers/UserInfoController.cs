@@ -19,7 +19,7 @@ namespace HospitalAPI.Controllers
         {
             var result = new UserModel();
             result.id = "00001";
-            result.username = "Noom101";
+            result.username = "Noom10100";
             result.name = "กิตติศักดิ์";
             result.surname = "จิตรเพียร";
             result.date = new DateTime(1995, 10, 24, 0, 0, 0);
