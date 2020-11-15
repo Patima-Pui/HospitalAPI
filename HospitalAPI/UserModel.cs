@@ -17,5 +17,14 @@ namespace HospitalAPI
         public List<UserModel> Datatable {get; set;}
     }
 
+    public class ResposeModel {
+        public bool Success { get; set; }
+    }
+
+    public class RequestLogin {
+        public string Username { get; set; }
+        public string Password { get; set; }
+    }
+
 
 }
