@@ -13,29 +13,40 @@ namespace HospitalAPI.Services
     {
         private IUserRepository _userRepository;
 
-        public UserService(IUserRepository userRepository) {
+        public UserService(IUserRepository userRepository)
+        {
             _userRepository = userRepository;
         }
-    public string SelectData()
-    {
-        string result = _userRepository.SelectDataIntoDB();
-        return result;
-    }
-
-    public ResposeModel ValidateLogin(RequestLogin item) {
-        ResposeModel response = new ResposeModel();
-
-        var result = _userRepository.SelectDataFromUsernamePassword(item);
-
-        if (result == ""){
-            response.Success = false;
-        } else {
-            response.Success = true;
+        public string SelectData()
+        {
+            string result = _userRepository.SelectDataIntoDB();
+            return result;
         }
 
-        return response;
-    }
-}
+        public ResposeModel ValidateLogin(RequestLogin item)
+        {
+            ResposeModel response = new ResposeModel();
 
+            if (item.Username != "" && item.Password != "")
+            {
+                var result = _userRepository.SelectDataFromUsernamePassword(item);
+
+                if (result == "")
+                {
+                    response.success = false;
+                }
+                else
+                {
+                    response.success = true;
+                }
+            }
+            else
+            {
+                throw new Exception("Invalid Username or Password");
+            }
+
+            return response;
+        }
+    }
 
 }

@@ -14,7 +14,8 @@ namespace HospitalAPI.Repositorys
     {
         public string SelectDataIntoDB()
         {
-            var cs = "Data Source=192.168.43.180,1433;Initial Catalog= HospitalDB;User Id=sa;Password=reallyStrongPwd123;";
+            // var cs = "Data Source=192.168.43.180,1433;Initial Catalog= HospitalDB;User Id=sa;Password=reallyStrongPwd123;";
+            var cs = "Server=localhost\\SQLEXPRESS;Database=HospitalDB;Trusted_Connection=True;";
             using var con = new SqlConnection(cs); //Using Class SqlConnection for COnnent to database
             con.Open();
 
@@ -36,7 +37,8 @@ namespace HospitalAPI.Repositorys
 
         public string SelectDataFromUsernamePassword(RequestLogin item) 
         {
-            var cs = "Data Source=192.168.43.180,1433;Initial Catalog= HospitalDB;User Id=sa;Password=reallyStrongPwd123;";
+            // var cs = "Data Source=192.168.43.180,1433;Initial Catalog= HospitalDB;User Id=sa;Password=reallyStrongPwd123;";
+             var cs = "Server=localhost\\SQLEXPRESS;Database=HospitalDB;Trusted_Connection=True;";
             using var con = new SqlConnection(cs); //Using Class SqlConnection for COnnent to database
             con.Open();
 

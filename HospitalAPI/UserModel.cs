@@ -12,19 +12,18 @@ namespace HospitalAPI
         public DateTime date {get; set;}
 
     }
-
+    ////////////////////////////////////////////////////
     public class UserModelList {
         public List<UserModel> Datatable {get; set;}
     }
 
     public class ResposeModel {
-        public bool Success { get; set; }
+        public bool success { get; set; }
     }
 
     public class RequestLogin {
         public string Username { get; set; }
         public string Password { get; set; }
     }
-
 
 }

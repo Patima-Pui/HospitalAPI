@@ -28,6 +28,7 @@ namespace HospitalAPI.Controllers
 
             return result;
         }
+        
         [HttpGet]
         [Route("GetList")]
         public UserModelList GetList()
@@ -107,7 +108,6 @@ namespace HospitalAPI.Controllers
             return p;
         }
 
-        
         [HttpGet]
         [Route("TestConnectionDatabase")]
         public string TestConnectionDatabase()
