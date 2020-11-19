@@ -7,19 +7,24 @@ namespace HospitalAPI.Repositorys
 {
     public interface IPatientRepository
     {
-        PatientModelList SelectPatientsAll();
+        PatientModelList SelectPatientsAll(PatientModelRequest requestSerach);
     }
 
     public class PatientRepository : IPatientRepository
     {
-        public PatientModelList SelectPatientsAll()
+        public PatientModelList SelectPatientsAll(PatientModelRequest requestSerach)
         {
             // var cs = "Data Source=192.168.43.180,1433;Initial Catalog= HospitalDB;User Id=sa;Password=reallyStrongPwd123;";
             var cs = "Server=localhost\\SQLEXPRESS;Database=HospitalDB;Trusted_Connection=True;";
             using var con = new SqlConnection(cs); //Using Class SqlConnection for COnnent to database
             con.Open();
+            
+            string sqlTyprId = ";";
+            if(requestSerach.TypeId != -1) {
+                sqlTyprId = string.Format("AND a.[TypeId] = {0};", requestSerach.TypeId);
+            }
 
-            string sql = @"SELECT   a.Id
+            string sql = string.Format(@"SELECT   a.Id
                                     ,a.Name
                                     ,a.Surname
                                     ,a.Age
@@ -29,7 +34,12 @@ namespace HospitalAPI.Repositorys
                                     ,b.TypeName
                         FROM PatientTbl a
                         LEFT JOIN PatientType b
-                        ON a.TypeId = b.Id;";
+                        ON a.TypeId = b.Id
+                        WHERE (a.[Name] LIKE '%{0}%' 
+                            OR a.[Surname] LIKE '%{0}%'
+                            OR a.[Id] LIKE '%{0}%'
+                            OR a.[NoOfVisit] LIKE '%{0}%')
+                        ", requestSerach.SearchText) + sqlTyprId;
             using var cmd = new SqlCommand(sql, con); //Using Class SqlCommand for query data
 
             using SqlDataReader rdr = cmd.ExecuteReader();

@@ -19,4 +19,9 @@ namespace HospitalAPI
         public List<PatientModel> Patienttable {get; set;}
     }
 
+    public class PatientModelRequest {
+        public string SearchText { get; set; }
+        public int TypeId { get; set; }
+    }
+
 }

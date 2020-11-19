@@ -5,7 +5,7 @@ namespace HospitalAPI.Services
 {
     public interface IPatientService
     {
-        PatientModelList SelectPatients();
+        PatientModelList SelectPatients(PatientModelRequest requestSerach);
     }
 
     public class PatientService : IPatientService
@@ -17,9 +17,9 @@ namespace HospitalAPI.Services
             _patientRepository = patientRepository;
         }
     
-        public PatientModelList SelectPatients()
+        public PatientModelList SelectPatients(PatientModelRequest requestSerach)
         {
-            PatientModelList result = _patientRepository.SelectPatientsAll();
+            PatientModelList result = _patientRepository.SelectPatientsAll(requestSerach);
             return result;
         }
     }
