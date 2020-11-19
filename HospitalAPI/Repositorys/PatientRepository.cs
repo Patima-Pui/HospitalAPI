@@ -19,7 +19,17 @@ namespace HospitalAPI.Repositorys
             using var con = new SqlConnection(cs); //Using Class SqlConnection for COnnent to database
             con.Open();
 
-            string sql = "SELECT * FROM PatientTbl";
+            string sql = @"SELECT   a.Id
+                                    ,a.Name
+                                    ,a.Surname
+                                    ,a.Age
+                                    ,a.BirthDay
+                                    ,a.TypeId
+                                    ,a.NoOfVisit
+                                    ,b.TypeName
+                        FROM PatientTbl a
+                        LEFT JOIN PatientType b
+                        ON a.TypeId = b.Id;";
             using var cmd = new SqlCommand(sql, con); //Using Class SqlCommand for query data
 
             using SqlDataReader rdr = cmd.ExecuteReader();
@@ -36,14 +46,14 @@ namespace HospitalAPI.Repositorys
                 //         rdr.GetString(2), rdr.GetInt32(3), rdr.GetDateTime(4), rdr.GetString(5), rdr.GetString(6) );
                 output.Patienttable.Add(
                     new PatientModel(){
-                        number = rdr.GetInt32(0),
-                        HN = rdr.GetString(1),
-                        name = rdr.GetString(2),
-                        surname = rdr.GetString(3),
-                        age = rdr.GetInt32(4),
-                        birthday = rdr.GetDateTime(5),
-                        typeId = rdr.GetInt32(6),
-                        visit = rdr.GetInt32(7) 
+                        hn = rdr.GetInt32(0),
+                        name = rdr.GetString(1),
+                        surname = rdr.GetString(2),
+                        age = rdr.GetInt32(3),
+                        birthday = rdr.GetDateTime(4),
+                        typeId = rdr.GetInt32(5),
+                        visit = rdr.GetInt32(6),
+                        typeName = rdr.GetString(7)
                     }
                 );
             }
