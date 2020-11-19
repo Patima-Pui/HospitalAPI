@@ -8,11 +8,11 @@ namespace HospitalAPI.Services
         PatientModelList SelectPatients();
     }
 
-    public class PatientsService : IPatientService
+    public class PatientService : IPatientService
     {
         private IPatientRepository _patientRepository;
 
-        public PatientsService(IPatientRepository patientRepository) 
+        public PatientService(IPatientRepository patientRepository) 
         {
             _patientRepository = patientRepository;
         }

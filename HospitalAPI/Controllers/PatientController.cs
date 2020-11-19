@@ -17,7 +17,7 @@ namespace HospitalAPI.Controllers
             _patientService = patientService;
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("PatientInfo")]
         public PatientModelList GetPatientList()
         {

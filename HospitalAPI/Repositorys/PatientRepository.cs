@@ -24,34 +24,29 @@ namespace HospitalAPI.Repositorys
 
             using SqlDataReader rdr = cmd.ExecuteReader();
 
-
             // string output = "";
-            // while (rdr.Read())
-            // {
-            //     //output=HN(0) Name(1) Surname(2) Age(3) Birthday(4) Type(5) Visit(6)
-            //     output += string.Format("{0} {1} {2} {3} {4} {5} {6}", rdr.GetInt32(0), rdr.GetString(1),
-            //             rdr.GetString(2), rdr.GetInt32(3), rdr.GetDateTime(4), rdr.GetString(5), rdr.GetString(6) );
-            // }
-
-
             PatientModelList output = new PatientModelList();
-            output.Datatable = new List<PatientModel>();
+            output.Patienttable = new List<PatientModel>();
 
             while (rdr.Read())
+
             {
-                output.Datatable.Add(
+                //output=HN(0) Name(1) Surname(2) Age(3) Birthday(4) TypeID(5) Visit(6)
+                // output += string.Format("{0} {1} {2} {3} {4} {5} {6}", rdr.GetString(0), rdr.GetString(1),
+                //         rdr.GetString(2), rdr.GetInt32(3), rdr.GetDateTime(4), rdr.GetString(5), rdr.GetString(6) );
+                output.Patienttable.Add(
                     new PatientModel(){
-                        HN = rdr.GetInt32(0),
-                        name = rdr.GetString(1),
-                        surname = rdr.GetString(2),
-                        age = rdr.GetInt32(3),
-                        birthday = rdr.GetDateTime(4),
-                        typeId = rdr.GetInt32(5),
-                        visit = rdr.GetInt32(6)
+                        number = rdr.GetInt32(0),
+                        HN = rdr.GetString(1),
+                        name = rdr.GetString(2),
+                        surname = rdr.GetString(3),
+                        age = rdr.GetInt32(4),
+                        birthday = rdr.GetDateTime(5),
+                        typeId = rdr.GetInt32(6),
+                        visit = rdr.GetInt32(7) 
                     }
                 );
             }
-
 
             return output;
         }

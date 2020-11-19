@@ -5,7 +5,8 @@ namespace HospitalAPI
 {
     public class PatientModel
     {
-        public int HN {get; set;}
+        public int number {get; set;}
+        public string HN {get; set;}
         public string name {get; set;}
         public string surname {get; set;}
         public int age {get; set;}
@@ -15,7 +16,7 @@ namespace HospitalAPI
     }
 
     public class PatientModelList {
-        public List<PatientModel> Datatable {get; set;}
+        public List<PatientModel> Patienttable {get; set;}
     }
 
 }

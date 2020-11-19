@@ -454,23 +454,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/Anawat/.nuget/packages/": {},
-    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
+    "C:\\Users\\USER\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/Anawat/Documents/pui/HospitalAPI/HospitalAPI/HospitalAPI.csproj",
+      "projectUniqueName": "D:\\ACP\\Web\\back\\HospitalAPI\\HospitalAPI\\HospitalAPI.csproj",
       "projectName": "HospitalAPI",
-      "projectPath": "/Users/Anawat/Documents/pui/HospitalAPI/HospitalAPI/HospitalAPI.csproj",
-      "packagesPath": "/Users/Anawat/.nuget/packages/",
-      "outputPath": "/Users/Anawat/Documents/pui/HospitalAPI/HospitalAPI/obj/",
+      "projectPath": "D:\\ACP\\Web\\back\\HospitalAPI\\HospitalAPI\\HospitalAPI.csproj",
+      "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+      "outputPath": "D:\\ACP\\Web\\back\\HospitalAPI\\HospitalAPI\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "/Users/Anawat/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -515,7 +511,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.301/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.404\\RuntimeIdentifierGraph.json"
       }
     }
   }
