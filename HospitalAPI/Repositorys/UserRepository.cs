@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
 
@@ -7,6 +8,7 @@ namespace HospitalAPI.Repositorys
     public interface IUserRepository
     {
         string SelectDataIntoDB();
+        UserModelList SelectUsersAll();
         string SelectDataFromUsernamePassword(RequestLogin item);
     }
 
@@ -56,7 +58,40 @@ namespace HospitalAPI.Repositorys
 
             return output;
         }
-    }
 
+        public UserModelList SelectUsersAll()
+        {
+            // var cs = "Data Source=192.168.43.180,1433;Initial Catalog= HospitalDB;User Id=sa;Password=reallyStrongPwd123;";
+            var cs = "Server=localhost\\SQLEXPRESS;Database=HospitalDB;Trusted_Connection=True;";
+            using var con = new SqlConnection(cs); //Using Class SqlConnection for COnnent to database
+            con.Open();
+
+            string sql = "SELECT Id, Username, Name, Surname, CreateDate FROM UserTbl";
+            using var cmd = new SqlCommand(sql, con); //Using Class SqlCommand for query data
+
+            using SqlDataReader rdr = cmd.ExecuteReader();
+
+            // string output = "";
+            UserModelList output = new UserModelList();
+            output.Usertable = new List<UserModel>();
+
+            while (rdr.Read())
+
+            {
+                output.Usertable.Add(
+                    new UserModel(){
+                        id = rdr.GetInt32(0),
+                        username = rdr.GetString(1),
+                        name = rdr.GetString(2),
+                        surname = rdr.GetString(3),
+                        createdate = rdr.GetDateTime(4),
+                    }
+                );
+            }
+
+            return output;
+        }
+
+    }
 
 }

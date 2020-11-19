@@ -7,6 +7,7 @@ namespace HospitalAPI.Services
     {
         string SelectData();
         ResposeModel ValidateLogin(RequestLogin item);
+        UserModelList SelectUsers();
     }
 
     public class UserService : IUserService
@@ -22,7 +23,11 @@ namespace HospitalAPI.Services
             string result = _userRepository.SelectDataIntoDB();
             return result;
         }
-
+        public UserModelList SelectUsers()
+        {
+            UserModelList result = _userRepository.SelectUsersAll();
+            return result;
+        }
         public ResposeModel ValidateLogin(RequestLogin item)
         {
             ResposeModel response = new ResposeModel();
