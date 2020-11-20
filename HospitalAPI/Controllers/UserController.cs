@@ -24,6 +24,14 @@ namespace HospitalAPI.Controllers
             return result;
         }
 
+        [HttpPost]
+        [Route("register")]
+        public ResposeModel Register([FromBody] UserProfileModel item)
+        {
+            ResposeModel result = _userService.UserProfile(item);
+            return result;
+        }
+
         [HttpGet]
         [Route("UserInfo")]
         public UserModelList GetUserList()

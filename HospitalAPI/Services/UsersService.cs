@@ -7,6 +7,7 @@ namespace HospitalAPI.Services
     {
         string SelectData();
         ResposeModel ValidateLogin(RequestLogin item);
+        ResposeModel UserProfile(UserProfileModel item);
         UserModelList SelectUsers();
     }
 
@@ -49,6 +50,25 @@ namespace HospitalAPI.Services
             {
                 throw new Exception("Invalid Username or Password");
             }
+
+            return response;
+        }
+
+        public ResposeModel UserProfile(UserProfileModel item)
+        {
+            ResposeModel response = new ResposeModel();
+
+            _userRepository.InsertDataForRegister(item);
+            // var result = _userRepository.InsertDataForRegister(item);
+
+            // if (result == "")
+            // {
+            //     response.success = true;
+            // }
+            // else
+            // {
+            response.success = false;
+            // }
 
             return response;
         }
