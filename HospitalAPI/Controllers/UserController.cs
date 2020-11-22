@@ -39,5 +39,13 @@ namespace HospitalAPI.Controllers
             UserModelList result = _userService.SelectUsers();
             return result;
         }
+
+        [HttpGet]
+        [Route("DropdownDepartment")]
+        public DropdownDepartmentListModel GetDepartmentList()
+        {
+            DropdownDepartmentListModel result = _userService.DepartmentList();
+            return result;
+        }
     }
 }

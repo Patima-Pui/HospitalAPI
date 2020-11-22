@@ -11,6 +11,7 @@ namespace HospitalAPI.Repositorys
         UserModelList SelectUsersAll();
         string SelectDataFromUsernamePassword(RequestLogin item);
         int InsertDataForRegister(UserProfileModel item);
+        DropdownDepartmentListModel SelectDepaertmentFromDB();
     }
 
     public class UserRepository : IUserRepository
@@ -144,6 +145,33 @@ namespace HospitalAPI.Repositorys
             return res;
         }
 
+        public DropdownDepartmentListModel SelectDepaertmentFromDB()
+        {
+            var cs = "Server=localhost\\SQLEXPRESS;Database=HospitalDB;Trusted_Connection=True;";
+            using var con = new SqlConnection(cs); //Using Class SqlConnection for COnnent to database
+            con.Open();
+
+            string sql = "SELECT Id, DepartmentName FROM UserDepartment";
+            using var cmd = new SqlCommand(sql, con);
+
+            using SqlDataReader rdr = cmd.ExecuteReader();
+
+            DropdownDepartmentListModel output = new DropdownDepartmentListModel();
+            output.departmentList = new List<DropdownDepartmentModel>();
+
+            while (rdr.Read())
+            {
+                output.departmentList.Add(
+                    new DropdownDepartmentModel(){
+                        id = rdr.GetInt32(0),
+                        name = rdr.GetString(1)
+                    }
+                );
+            };
+
+            return output;
+
+        }
     }
 
 }

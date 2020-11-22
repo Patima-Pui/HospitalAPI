@@ -9,6 +9,8 @@ namespace HospitalAPI.Services
         ResposeModel ValidateLogin(RequestLogin item);
         ResposeModel UserProfile(UserProfileModel item);
         UserModelList SelectUsers();
+        DropdownDepartmentListModel DepartmentList();
+
     }
 
     public class UserService : IUserService
@@ -69,6 +71,12 @@ namespace HospitalAPI.Services
             }
 
             return response;
+        }
+
+        public DropdownDepartmentListModel DepartmentList()
+        {
+            DropdownDepartmentListModel result = _userRepository.SelectDepaertmentFromDB();
+            return result;
         }
     }  
 
