@@ -55,4 +55,14 @@ namespace HospitalAPI
          public int departmentId { get; set; }
     }
 
+    public class DropdownDepartmentModel
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+    }
+
+    public class DropdownDepartmentListModel
+    {
+        public List<DropdownDepartmentModel> departmentList { get; set; }
+    }
 }
