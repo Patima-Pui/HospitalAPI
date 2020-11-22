@@ -17,7 +17,7 @@ namespace HospitalAPI.Controllers
         }
 
         [HttpPost]
-        [Route("login")]
+        [Route("Login")]
         public ResposeModel Login([FromBody] RequestLogin item)
         {
             ResposeModel result = _userService.ValidateLogin(item);
@@ -25,7 +25,7 @@ namespace HospitalAPI.Controllers
         }
 
         [HttpPost]
-        [Route("register")]
+        [Route("Register")]
         public ResposeModel Register([FromBody] UserProfileModel item)
         {
             ResposeModel result = _userService.UserProfile(item);

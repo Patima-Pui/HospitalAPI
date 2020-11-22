@@ -10,7 +10,7 @@ namespace HospitalAPI.Repositorys
         string SelectDataIntoDB();
         UserModelList SelectUsersAll();
         string SelectDataFromUsernamePassword(RequestLogin item);
-        void InsertDataForRegister(UserProfileModel item);
+        int InsertDataForRegister(UserProfileModel item);
     }
 
     public class UserRepository : IUserRepository
@@ -45,7 +45,7 @@ namespace HospitalAPI.Repositorys
             using var con = new SqlConnection(cs); //Using Class SqlConnection for COnnent to database
             con.Open();
 
-            string query = string.Format("SELECT * FROM UserTbl WHERE Username = '{0}' AND Password = '{1}';", item.Username, item.Password);
+            string query = string.Format("SELECT Id FROM UserTbl WHERE Username = '{0}' AND Password = '{1}';", item.Username, item.Password);
             using var cmd = new SqlCommand(query, con); //Using Class SqlCommand for query data
 
             using SqlDataReader rdr = cmd.ExecuteReader();
@@ -96,7 +96,7 @@ namespace HospitalAPI.Repositorys
             return output;
         }
 
-        public void InsertDataForRegister(UserProfileModel item) 
+        public int InsertDataForRegister(UserProfileModel item) 
         {
             var cs = "Server=localhost\\SQLEXPRESS;Database=HospitalDB;Trusted_Connection=True;";
             using var con = new SqlConnection(cs); //Using Class SqlConnection for COnnent to database
@@ -141,7 +141,7 @@ namespace HospitalAPI.Repositorys
             cmd.Parameters.AddWithValue("@DepartmentId", item.departmentId); 
  
             var res = cmd.ExecuteNonQuery();
-
+            return res;
         }
 
     }

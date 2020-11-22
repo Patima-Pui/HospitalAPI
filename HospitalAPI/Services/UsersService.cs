@@ -57,21 +57,19 @@ namespace HospitalAPI.Services
         public ResposeModel UserProfile(UserProfileModel item)
         {
             ResposeModel response = new ResposeModel();
+            var result = _userRepository.InsertDataForRegister(item);
 
-            _userRepository.InsertDataForRegister(item);
-            // var result = _userRepository.InsertDataForRegister(item);
-
-            // if (result == "")
-            // {
-            //     response.success = true;
-            // }
-            // else
-            // {
-            response.success = false;
-            // }
+            if (result == 1)
+            {
+                response.success = true;
+            }
+            else
+            {
+                response.success = false;
+            }
 
             return response;
         }
-    }
+    }  
 
 }
