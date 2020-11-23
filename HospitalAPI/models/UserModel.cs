@@ -32,7 +32,9 @@ namespace HospitalAPI
     {
         public List<UserModel> Usertable { get; set; }
     }
-
+    public class UserModelRequest {
+        public string SearchText { get; set; }
+    }
     public class ResposeModel
     {
         public bool success { get; set; }

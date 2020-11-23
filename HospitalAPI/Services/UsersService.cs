@@ -9,6 +9,7 @@ namespace HospitalAPI.Services
         ResposeModel ValidateLogin(RequestLogin item);
         ResposeModel UserProfile(UserProfileModel item);
         UserModelList SelectUsers();
+        UserModelList SelectUserList(UserModelRequest requestSerach);
         DropdownDepartmentListModel DepartmentList();
 
     }
@@ -29,6 +30,11 @@ namespace HospitalAPI.Services
         public UserModelList SelectUsers()
         {
             UserModelList result = _userRepository.SelectUsersAll();
+            return result;
+        }
+          public UserModelList SelectUserList(UserModelRequest requestSerach)
+        {
+            UserModelList result = _userRepository.QueryUsers(requestSerach);
             return result;
         }
         public ResposeModel ValidateLogin(RequestLogin item)

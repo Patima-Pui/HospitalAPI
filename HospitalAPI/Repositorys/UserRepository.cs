@@ -9,6 +9,7 @@ namespace HospitalAPI.Repositorys
     {
         string SelectDataIntoDB();
         UserModelList SelectUsersAll();
+        UserModelList QueryUsers(UserModelRequest requestSerach);
         string SelectDataFromUsernamePassword(RequestLogin item);
         int InsertDataForRegister(UserProfileModel item);
         DropdownDepartmentListModel SelectDepaertmentFromDB();
@@ -90,6 +91,39 @@ namespace HospitalAPI.Repositorys
                 );
             }
 
+            return output;
+        }
+
+        public UserModelList QueryUsers(UserModelRequest requestSerach)
+        {
+            var cs = "Server=localhost\\SQLEXPRESS;Database=HospitalDB;Trusted_Connection=True;";
+            using var con = new SqlConnection(cs); //Using Class SqlConnection for COnnent to database
+            con.Open();
+
+             string sql = string.Format(@"SELECT Id, Username, Name, Surname, CreateDate FROM UserTbl WHERE (Name LIKE '%{0}%' OR Surname LIKE '%{0}%' OR Username LIKE '%{0}%')
+                        ", requestSerach.SearchText);
+            
+            using var cmd = new SqlCommand(sql, con); //Using Class SqlCommand for query data
+
+            using SqlDataReader rdr = cmd.ExecuteReader();
+
+            UserModelList output = new UserModelList();
+            output.Usertable = new List<UserModel>();
+
+            while (rdr.Read())
+
+            {
+                output.Usertable.Add(
+                     new UserModel()
+                     {
+                        id = rdr.GetInt32(0),
+                        username = rdr.GetString(1),
+                        name = rdr.GetString(2),
+                        surname = rdr.GetString(3),
+                        createdate = rdr.GetDateTime(4),
+                     }
+                 );
+            }
             return output;
         }
 
