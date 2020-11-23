@@ -39,10 +39,9 @@ namespace HospitalAPI.Repositorys
             return output;
         }
 
-        public string SelectDataFromUsernamePassword(RequestLogin item) 
+        public string SelectDataFromUsernamePassword(RequestLogin item)
         {
-            // var cs = "Data Source=192.168.43.180,1433;Initial Catalog= HospitalDB;User Id=sa;Password=reallyStrongPwd123;";
-             var cs = "Server=localhost\\SQLEXPRESS;Database=HospitalDB;Trusted_Connection=True;";
+            var cs = "Server=localhost\\SQLEXPRESS;Database=HospitalDB;Trusted_Connection=True;";
             using var con = new SqlConnection(cs); //Using Class SqlConnection for COnnent to database
             con.Open();
 
@@ -63,7 +62,6 @@ namespace HospitalAPI.Repositorys
 
         public UserModelList SelectUsersAll()
         {
-            // var cs = "Data Source=192.168.43.180,1433;Initial Catalog= HospitalDB;User Id=sa;Password=reallyStrongPwd123;";
             var cs = "Server=localhost\\SQLEXPRESS;Database=HospitalDB;Trusted_Connection=True;";
             using var con = new SqlConnection(cs); //Using Class SqlConnection for COnnent to database
             con.Open();
@@ -80,11 +78,9 @@ namespace HospitalAPI.Repositorys
             while (rdr.Read())
 
             {
-                // output=id(0) username(1) name(2) surname(3) createdate(4)
-                // output += string.Format("{0} {1} {2} {3} {4} {5} {6}", rdr.GetInt32(0), rdr.GetString(1),
-                //         rdr.GetString(2), rdr.GetString(3), rdr.GetDateTime(4) );
                 output.Usertable.Add(
-                    new UserModel(){
+                    new UserModel()
+                    {
                         id = rdr.GetInt32(0),
                         username = rdr.GetString(1),
                         name = rdr.GetString(2),
@@ -97,7 +93,7 @@ namespace HospitalAPI.Repositorys
             return output;
         }
 
-        public int InsertDataForRegister(UserProfileModel item) 
+        public int InsertDataForRegister(UserProfileModel item)
         {
             var cs = "Server=localhost\\SQLEXPRESS;Database=HospitalDB;Trusted_Connection=True;";
             using var con = new SqlConnection(cs); //Using Class SqlConnection for COnnent to database
@@ -105,29 +101,9 @@ namespace HospitalAPI.Repositorys
 
             DateTime dateTimeVariable = DateTime.Now;
             SqlCommand cmd = new SqlCommand(@"INSERT INTO UserTbl (
-                    Username,
-                    Password,
-                    Name,
-                    Surname,
-                    Telephone,
-                    Email,
-                    CreateDate,
-                    CreateName,
-                    UpdateDate,
-                    UpdateName,
-                    DepartmentId
+                    Username, Password, Name, Surname, Telephone, Email, CreateDate, CreateName, UpdateDate, UpdateName,  DepartmentId
                 ) VALUES (
-                    @Username,
-                    @Password,
-                    @Name,
-                    @Surname,
-                    @Telephone,
-                    @Email,
-                    @CreateDate,
-                    @CreateName,
-                    @UpdateDate,
-                    @UpdateName,
-                    @DepartmentId
+                    @Username, @Password, @Name, @Surname, @Telephone, @Email, @CreateDate, @CreateName, @UpdateDate, @UpdateName, @DepartmentId
                 )", con);
             cmd.Parameters.AddWithValue("@Username", item.username);
             cmd.Parameters.AddWithValue("@Password", item.password);
@@ -139,8 +115,8 @@ namespace HospitalAPI.Repositorys
             cmd.Parameters.AddWithValue("@CreateName", item.username);
             cmd.Parameters.AddWithValue("@UpdateDate", dateTimeVariable);
             cmd.Parameters.AddWithValue("@UpdateName", item.username);
-            cmd.Parameters.AddWithValue("@DepartmentId", item.departmentId); 
- 
+            cmd.Parameters.AddWithValue("@DepartmentId", item.departmentId);
+
             var res = cmd.ExecuteNonQuery();
             return res;
         }
@@ -162,7 +138,8 @@ namespace HospitalAPI.Repositorys
             while (rdr.Read())
             {
                 output.departmentList.Add(
-                    new DropdownDepartmentModel(){
+                    new DropdownDepartmentModel()
+                    {
                         id = rdr.GetInt32(0),
                         name = rdr.GetString(1)
                     }

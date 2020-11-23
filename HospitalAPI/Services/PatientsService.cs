@@ -20,7 +20,7 @@ namespace HospitalAPI.Services
     
         public PatientModelList SelectPatients(PatientModelRequest requestSerach)
         {
-            PatientModelList result = _patientRepository.SelectPatientsAll(requestSerach);
+            PatientModelList result = _patientRepository.QueryPatients(requestSerach);
             return result;
         }
         public PatientModel SelectIndividual(PatientRequestIdModel requestId)
