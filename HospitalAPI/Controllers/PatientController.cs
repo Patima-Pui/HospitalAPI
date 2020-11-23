@@ -18,12 +18,20 @@ namespace HospitalAPI.Controllers
         }
 
         [HttpGet]
-        [Route("PatientInfo")]
+        [Route("QueryPatient")]
         public PatientModelList GetPatientList([FromQuery] PatientModelRequest request)
         {
             PatientModelList result = _patientService.SelectPatients(request);
-             return result;
+            return result;
+        }
+
+        [HttpGet]
+        [Route("PatientInfo")]
+        public PatientModel GetIndividualPatient([FromQuery] PatientRequestIdModel requestId)
+        {
+            PatientModel result = _patientService.SelectIndividual(requestId);
+            return result;
         }
     }
-  
+
 }

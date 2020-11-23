@@ -13,6 +13,8 @@ namespace HospitalAPI
         public int typeId {get; set;}
         public string typeName {get; set;}
         public int visit {get; set;}
+        public DateTime appointment {get; set;}
+        public string doctor {get; set;}
     }
 
     public class PatientModelList {
@@ -22,6 +24,10 @@ namespace HospitalAPI
     public class PatientModelRequest {
         public string SearchText { get; set; }
         public int TypeId { get; set; }
+    }
+
+        public class PatientRequestIdModel {
+        public int Id { get; set; }
     }
 
 }
