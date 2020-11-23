@@ -9,6 +9,7 @@ namespace HospitalAPI.Repositorys
     {
         PatientModelList QueryPatients(PatientModelRequest requestSerach);
         PatientModel SelectIndividualRepo(PatientRequestIdModel requestId);
+        DropdownTypeModelList SelectTypeListFromDB();
     }
 
     public class PatientRepository : IPatientRepository
@@ -114,6 +115,35 @@ namespace HospitalAPI.Repositorys
                 };
             }
             return output;
+        }
+
+        public DropdownTypeModelList SelectTypeListFromDB()
+        {
+            var cs = "Server=localhost\\SQLEXPRESS;Database=HospitalDB;Trusted_Connection=True;";
+            using var con = new SqlConnection(cs); //Using Class SqlConnection for COnnent to database
+            con.Open();
+
+            string sql = "SELECT Id, TypeName FROM PatientType";
+            using var cmd = new SqlCommand(sql, con);
+
+            using SqlDataReader rdr = cmd.ExecuteReader();
+
+            DropdownTypeModelList output = new DropdownTypeModelList();
+            output.typeList = new List<DropdownTypeModel>();
+
+            while (rdr.Read())
+            {
+                output.typeList.Add(
+                    new DropdownTypeModel()
+                    {
+                        id = rdr.GetInt32(0),
+                        name = rdr.GetString(1)
+                    }
+                );
+            };
+
+            return output;
+
         }
 
     }

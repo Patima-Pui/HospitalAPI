@@ -32,6 +32,14 @@ namespace HospitalAPI.Controllers
             PatientModel result = _patientService.SelectIndividual(requestId);
             return result;
         }
+
+        [HttpGet]
+        [Route("DropdownType")]
+        public DropdownTypeModelList GetTypeList()
+        {
+            DropdownTypeModelList result = _patientService.TypeList();
+            return result;
+        }
     }
 
 }

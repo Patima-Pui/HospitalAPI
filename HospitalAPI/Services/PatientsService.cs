@@ -7,6 +7,7 @@ namespace HospitalAPI.Services
     {
         PatientModelList SelectPatients(PatientModelRequest requestSerach);
         PatientModel SelectIndividual(PatientRequestIdModel requestId);
+        DropdownTypeModelList TypeList();
     }
 
     public class PatientService : IPatientService
@@ -26,6 +27,12 @@ namespace HospitalAPI.Services
         public PatientModel SelectIndividual(PatientRequestIdModel requestId)
         {
             PatientModel result = _patientRepository.SelectIndividualRepo(requestId);
+            return result;
+        }
+
+        public DropdownTypeModelList TypeList()
+        {
+            DropdownTypeModelList result = _patientRepository.SelectTypeListFromDB();
             return result;
         }
     }
