@@ -33,7 +33,7 @@ namespace HospitalAPI.Controllers
         }
 
         [HttpGet]
-        [Route("UserInfo")]
+        [Route("UserAll")]
         public UserModelList GetUserList()
         {
             UserModelList result = _userService.SelectUsers();
@@ -47,11 +47,28 @@ namespace HospitalAPI.Controllers
             UserModelList result = _userService.SelectUserList(request);
             return result;
         }
+
+        [HttpGet]
+        [Route("UserInfo")]
+        public UserProfileModel GetIndividualPatient([FromQuery] UserRequestIdModel requestId)
+        {
+            UserProfileModel result = _userService.SelectIndividual(requestId);
+            return result;
+        }
+
         [HttpGet]
         [Route("DropdownDepartment")]
         public DropdownDepartmentListModel GetDepartmentList()
         {
             DropdownDepartmentListModel result = _userService.DepartmentList();
+            return result;
+        }
+
+        [HttpPut]
+        [Route("UpdateUserProfile")]
+        public ResposeModel UpdateUserProfile([FromBody] UserProfileModel request)
+        {
+            ResposeModel result = _userService.UpdateUserProfile(request);
             return result;
         }
     }

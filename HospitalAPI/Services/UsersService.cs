@@ -8,8 +8,10 @@ namespace HospitalAPI.Services
         string SelectData();
         ResposeModel ValidateLogin(RequestLogin item);
         ResposeModel UserProfile(UserProfileModel item);
+        ResposeModel UpdateUserProfile(UserProfileModel item);
         UserModelList SelectUsers();
         UserModelList SelectUserList(UserModelRequest requestSerach);
+        UserProfileModel SelectIndividual(UserRequestIdModel requestId);
         DropdownDepartmentListModel DepartmentList();
 
     }
@@ -79,10 +81,33 @@ namespace HospitalAPI.Services
             return response;
         }
 
+        public UserProfileModel SelectIndividual(UserRequestIdModel requestId)
+        {
+            UserProfileModel result = _userRepository.SelectIndividualRepo(requestId);
+            return result;
+        }
+
         public DropdownDepartmentListModel DepartmentList()
         {
             DropdownDepartmentListModel result = _userRepository.SelectDepaertmentFromDB();
             return result;
+        }
+
+        public ResposeModel UpdateUserProfile(UserProfileModel item)
+        {
+            ResposeModel response = new ResposeModel();
+            var result = _userRepository.UpdateUserProfile(item);
+
+            if (result == 1)
+            {
+                response.success = true;
+            }
+            else
+            {
+                response.success = false;
+            }
+
+            return response;
         }
     }  
 

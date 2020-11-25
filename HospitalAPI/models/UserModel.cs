@@ -32,7 +32,8 @@ namespace HospitalAPI
     {
         public List<UserModel> Usertable { get; set; }
     }
-    public class UserModelRequest {
+    public class UserModelRequest
+    {
         public string SearchText { get; set; }
     }
     public class ResposeModel
@@ -48,15 +49,22 @@ namespace HospitalAPI
 
     public class UserProfileModel
     {
+        public int id { get; set; }
         public string username { get; set; }
         public string password { get; set; }
         public string name { get; set; }
         public string surname { get; set; }
-         public string telephone { get; set; }
-         public string email { get; set; }
-         public int departmentId { get; set; }
+        public string telephone { get; set; }
+        public string email { get; set; }
+        public int departmentId { get; set; }
+        public string departmentName { get; set; }
     }
 
+    public class UserRequestIdModel
+    {
+        public int Id { get; set; }
+    }
+    
     public class DropdownDepartmentModel
     {
         public int id { get; set; }
