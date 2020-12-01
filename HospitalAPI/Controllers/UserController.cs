@@ -72,12 +72,12 @@ namespace HospitalAPI.Controllers
             return result;
         }
 
-        // [HttpDelete]
-        // [Route("DeleteProfile")]
-        // public ResposeModel DeleteProfile(UserRequestIdModel requestId)
-        // {
-        //     ResposeModel result = _userService.DeleteProfile(requestId);
-        //     return result; 
-        // }
+        [HttpDelete]
+        [Route("DeleteProfile")]
+        public ResposeModel DeleteProfile(UserRequestIdModel requestId)
+        {
+            ResposeModel result = _userService.DeleteProfile(requestId);
+            return result; 
+        }
     }
 }

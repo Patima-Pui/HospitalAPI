@@ -15,7 +15,7 @@ namespace HospitalAPI.Repositorys
         int InsertDataForRegister(UserProfileModel item);
         int UpdateUserProfile(UserProfileModel item);
         DropdownDepartmentListModel SelectDepaertmentFromDB();
-        // int DeleteProfileRopo(UserRequestIdModel requestId);
+        int DeleteProfileRopo(UserRequestIdModel requestId);
     }
 
     public class UserRepository : IUserRepository
@@ -249,19 +249,19 @@ namespace HospitalAPI.Repositorys
             return res;
         }
 
-        // public int DeleteProfileRopo(UserRequestIdModel requestId)
-        // {
-        //     var cs = "Server=localhost\\SQLEXPRESS;Database=HospitalDB;Trusted_Connection=True;";
-        //     using var con = new SqlConnection(cs);
-        //     con.Open();
+        public int DeleteProfileRopo(UserRequestIdModel requestId)
+        {
+            var cs = "Server=localhost\\SQLEXPRESS;Database=HospitalDB;Trusted_Connection=True;";
+            using var con = new SqlConnection(cs);
+            con.Open();
 
-        //     string sql = string.Format(@"DELETE FROM UserTbl WHERE Id = {0}", requestId.Id);
+            string sql = string.Format(@"DELETE FROM UserTbl WHERE Id = {0}", requestId.Id);
 
-        //     using var cmd = new SqlCommand(sql, con);
+            using var cmd = new SqlCommand(sql, con);
 
-        //     var res = cmd.ExecuteNonQuery();
-        //     return res;
-        // }
+            var res = cmd.ExecuteNonQuery();
+            return res;
+        }
 
     }
 

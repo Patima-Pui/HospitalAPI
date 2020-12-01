@@ -13,7 +13,7 @@ namespace HospitalAPI.Services
         UserModelList SelectUserList(UserModelRequest requestSerach);
         UserProfileModel SelectIndividual(UserRequestIdModel requestId);
         DropdownDepartmentListModel DepartmentList();
-        // ResposeModel DeleteProfile(UserRequestIdModel requestId);
+        ResposeModel DeleteProfile(UserRequestIdModel requestId);
 
     }
 
@@ -114,22 +114,22 @@ namespace HospitalAPI.Services
             return response;
         }
 
-        // public ResposeModel DeleteProfile(UserRequestIdModel requestId)
-        // {
-        //     ResposeModel response = new ResposeModel();
-        //     var result =  _userRepository.DeleteProfileRopo(requestId);
-        //     if (result == 1)
-        //     {
-        //         response.success = true;
-        //     }
-        //     else
-        //     {
-        //         response.success = false;
-        //     }
+        public ResposeModel DeleteProfile(UserRequestIdModel requestId)
+        {
+            ResposeModel response = new ResposeModel();
+            var result =  _userRepository.DeleteProfileRopo(requestId);
+            if (result == 1)
+            {
+                response.success = true;
+            }
+            else
+            {
+                response.success = false;
+            }
 
-        //     return response;
-        //     // return result;
-        // }
+            return response;
+            // return result;
+        }
 
     }  
 
