@@ -74,7 +74,7 @@ namespace HospitalAPI.Controllers
 
         [HttpDelete]
         [Route("DeleteProfile")]
-        public ResposeModel DeleteProfile(UserRequestIdModel requestId)
+        public ResposeModel DeleteProfile([FromBody] UserRequestIdModel requestId)
         {
             ResposeModel result = _userService.DeleteProfile(requestId);
             return result; 
