@@ -6,13 +6,14 @@ namespace HospitalAPI.Services
     public interface IUserService
     {
         string SelectData();
-        ResposeModel ValidateLogin(RequestLogin item);
+        ResposeLoginModel ValidateLogin(RequestLogin item);
         ResposeModel UserProfile(UserProfileModel item);
         ResposeModel UpdateUserProfile(UserProfileModel item);
         UserModelList SelectUsers();
         UserModelList SelectUserList(UserModelRequest requestSerach);
         UserProfileModel SelectIndividual(UserRequestIdModel requestId);
         DropdownDepartmentListModel DepartmentList();
+        // ResposeModel DeleteProfile(UserRequestIdModel requestId);
 
     }
 
@@ -39,9 +40,10 @@ namespace HospitalAPI.Services
             UserModelList result = _userRepository.QueryUsers(requestSerach);
             return result;
         }
-        public ResposeModel ValidateLogin(RequestLogin item)
+
+        public ResposeLoginModel ValidateLogin(RequestLogin item)
         {
-            ResposeModel response = new ResposeModel();
+            ResposeLoginModel response = new ResposeLoginModel();
 
             if (item.Username != "" && item.Password != "")
             {
@@ -50,10 +52,12 @@ namespace HospitalAPI.Services
                 if (result == "")
                 {
                     response.success = false;
+                    // response.id = -1;
                 }
                 else
                 {
                     response.success = true;
+                    response.id = Int32.Parse(result);
                 }
             }
             else
@@ -109,6 +113,24 @@ namespace HospitalAPI.Services
 
             return response;
         }
+
+        // public ResposeModel DeleteProfile(UserRequestIdModel requestId)
+        // {
+        //     ResposeModel response = new ResposeModel();
+        //     var result =  _userRepository.DeleteProfileRopo(requestId);
+        //     if (result == 1)
+        //     {
+        //         response.success = true;
+        //     }
+        //     else
+        //     {
+        //         response.success = false;
+        //     }
+
+        //     return response;
+        //     // return result;
+        // }
+
     }  
 
 }

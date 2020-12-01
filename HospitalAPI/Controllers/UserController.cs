@@ -18,9 +18,9 @@ namespace HospitalAPI.Controllers
 
         [HttpPost]
         [Route("Login")]
-        public ResposeModel Login([FromBody] RequestLogin item)
+        public ResposeLoginModel Login([FromBody] RequestLogin item)
         {
-            ResposeModel result = _userService.ValidateLogin(item);
+            ResposeLoginModel result = _userService.ValidateLogin(item);
             return result;
         }
 
@@ -71,5 +71,13 @@ namespace HospitalAPI.Controllers
             ResposeModel result = _userService.UpdateUserProfile(request);
             return result;
         }
+
+        // [HttpDelete]
+        // [Route("DeleteProfile")]
+        // public ResposeModel DeleteProfile(UserRequestIdModel requestId)
+        // {
+        //     ResposeModel result = _userService.DeleteProfile(requestId);
+        //     return result; 
+        // }
     }
 }

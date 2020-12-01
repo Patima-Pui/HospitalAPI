@@ -41,6 +41,12 @@ namespace HospitalAPI
         public bool success { get; set; }
     }
 
+    public class ResposeLoginModel
+    {
+        public bool success { get; set; }
+        public int id { get; set; }
+    }
+   
     public class RequestLogin
     {
         public string Username { get; set; }
