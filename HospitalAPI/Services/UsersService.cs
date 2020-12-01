@@ -52,7 +52,7 @@ namespace HospitalAPI.Services
                 if (result == "")
                 {
                     response.success = false;
-                    // response.id = -1;
+                    response.id = -1;
                 }
                 else
                 {
