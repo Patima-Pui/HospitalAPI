@@ -10,10 +10,12 @@ namespace HospitalAPI.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly ILogService _logService;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, ILogService logService)
         {
             _userService = userService;
+            _logService = logService;
         }
 
         [HttpPost]
@@ -29,6 +31,32 @@ namespace HospitalAPI.Controllers
         public ResposeModel Register([FromBody] UserProfileModel item)
         {
             ResposeModel result = _userService.UserProfile(item);
+
+            LogModel logmodel = new LogModel()
+            {
+                Action = "Register",
+                Target = item.username,
+                CreateName = item.upSertName
+            };
+            _logService.CreateLog(logmodel);
+
+            return result;
+        }
+
+        [HttpPost]
+        [Route("AddUser")]
+        public ResposeModel AddUser([FromBody] UserProfileModel item)
+        {
+            ResposeModel result = _userService.UserProfile(item);
+
+            LogModel logmodel = new LogModel()
+            {
+                Action = "Add",
+                Target = item.username,
+                CreateName = item.upSertName
+            };
+            _logService.CreateLog(logmodel);
+
             return result;
         }
 
@@ -69,14 +97,30 @@ namespace HospitalAPI.Controllers
         public ResposeModel UpdateUserProfile([FromBody] UserProfileModel request)
         {
             ResposeModel result = _userService.UpdateUserProfile(request);
+            LogModel logmodel = new LogModel()
+            {
+                Action = "Edit",
+                Target = request.username,
+                CreateName = request.upSertName
+            };
+            _logService.CreateLog(logmodel);
             return result;
         }
 
         [HttpDelete]
         [Route("DeleteProfile")]
-        public ResposeModel DeleteProfile([FromBody] UserRequestIdModel requestId)
+        public ResposeModel DeleteProfile([FromBody] RequestDeleteModel requestDelete)
         {
-            ResposeModel result = _userService.DeleteProfile(requestId);
+            ResposeModel result = _userService.DeleteProfile(requestDelete);
+
+             LogModel logmodel = new LogModel()
+            {
+                Action = "Delete",
+                Target = requestDelete.Username,
+                CreateName =  requestDelete.DeleteName
+            };
+            _logService.CreateLog(logmodel);
+
             return result; 
         }
     }

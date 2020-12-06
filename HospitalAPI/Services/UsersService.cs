@@ -13,7 +13,7 @@ namespace HospitalAPI.Services
         UserModelList SelectUserList(UserModelRequest requestSerach);
         UserProfileModel SelectIndividual(UserRequestIdModel requestId);
         DropdownDepartmentListModel DepartmentList();
-        ResposeModel DeleteProfile(UserRequestIdModel requestId);
+        ResposeModel DeleteProfile(RequestDeleteModel requestDelete);
 
     }
 
@@ -35,7 +35,7 @@ namespace HospitalAPI.Services
             UserModelList result = _userRepository.SelectUsersAll();
             return result;
         }
-          public UserModelList SelectUserList(UserModelRequest requestSerach)
+        public UserModelList SelectUserList(UserModelRequest requestSerach)
         {
             UserModelList result = _userRepository.QueryUsers(requestSerach);
             return result;
@@ -72,7 +72,6 @@ namespace HospitalAPI.Services
         {
             ResposeModel response = new ResposeModel();
             var result = _userRepository.InsertDataForRegister(item);
-
             if (result == 1)
             {
                 response.success = true;
@@ -114,10 +113,10 @@ namespace HospitalAPI.Services
             return response;
         }
 
-        public ResposeModel DeleteProfile(UserRequestIdModel requestId)
+        public ResposeModel DeleteProfile(RequestDeleteModel requestDelete)
         {
             ResposeModel response = new ResposeModel();
-            var result =  _userRepository.DeleteProfileRopo(requestId);
+            var result = _userRepository.DeleteProfileRopo(requestDelete);
             if (result == 1)
             {
                 response.success = true;
@@ -131,6 +130,6 @@ namespace HospitalAPI.Services
             // return result;
         }
 
-    }  
+    }
 
 }

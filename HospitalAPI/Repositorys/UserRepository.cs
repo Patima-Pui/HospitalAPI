@@ -15,7 +15,7 @@ namespace HospitalAPI.Repositorys
         int InsertDataForRegister(UserProfileModel item);
         int UpdateUserProfile(UserProfileModel item);
         DropdownDepartmentListModel SelectDepaertmentFromDB();
-        int DeleteProfileRopo(UserRequestIdModel requestId);
+        int DeleteProfileRopo(RequestDeleteModel requestDelete);
     }
 
     public class UserRepository : IUserRepository
@@ -179,9 +179,9 @@ namespace HospitalAPI.Repositorys
             cmd.Parameters.AddWithValue("@Telephone", item.telephone);
             cmd.Parameters.AddWithValue("@Email", item.email);
             cmd.Parameters.AddWithValue("@CreateDate", dateTimeVariable);
-            cmd.Parameters.AddWithValue("@CreateName", item.username);
+            cmd.Parameters.AddWithValue("@CreateName", item.upSertName);
             cmd.Parameters.AddWithValue("@UpdateDate", dateTimeVariable);
-            cmd.Parameters.AddWithValue("@UpdateName", item.username);
+            cmd.Parameters.AddWithValue("@UpdateName", item.upSertName);
             cmd.Parameters.AddWithValue("@DepartmentId", item.departmentId);
 
             var res = cmd.ExecuteNonQuery();
@@ -242,20 +242,20 @@ namespace HospitalAPI.Repositorys
             cmd.Parameters.AddWithValue("@Telephone", item.telephone);
             cmd.Parameters.AddWithValue("@Email", item.email);
             cmd.Parameters.AddWithValue("@UpdateDate", dateTimeVariable);
-            cmd.Parameters.AddWithValue("@UpdateName", item.username);
+            cmd.Parameters.AddWithValue("@UpdateName", item.upSertName);
             cmd.Parameters.AddWithValue("@DepartmentId", item.departmentId);
 
             var res = cmd.ExecuteNonQuery();
             return res;
         }
 
-        public int DeleteProfileRopo(UserRequestIdModel requestId)
+        public int DeleteProfileRopo(RequestDeleteModel requestDelete)
         {
             var cs = "Server=localhost\\SQLEXPRESS;Database=HospitalDB;Trusted_Connection=True;";
             using var con = new SqlConnection(cs);
             con.Open();
 
-            string sql = string.Format(@"DELETE FROM UserTbl WHERE Id = {0}", requestId.Id);
+            string sql = string.Format(@"DELETE FROM UserTbl WHERE Id = {0}", requestDelete.Id);
 
             using var cmd = new SqlCommand(sql, con);
 

@@ -64,6 +64,7 @@ namespace HospitalAPI
         public string email { get; set; }
         public int departmentId { get; set; }
         public string departmentName { get; set; }
+        public string upSertName { get; set; }
     }
 
     public class UserRequestIdModel
@@ -71,6 +72,13 @@ namespace HospitalAPI
         public int Id { get; set; }
     }
     
+     public class RequestDeleteModel
+    {
+        public int Id { get; set; }
+        public string Username { get; set; }
+        public string DeleteName { get; set; }
+    }
+
     public class DropdownDepartmentModel
     {
         public int id { get; set; }
