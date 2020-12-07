@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace HospitalAPI.Repositorys
@@ -6,6 +7,7 @@ namespace HospitalAPI.Repositorys
     public interface ILogRepository
     {
         void InsertLog(LogModel request);
+        LogModelList SelectLogListAll();
     }
 
     public class LogRepository : ILogRepository
@@ -26,7 +28,37 @@ namespace HospitalAPI.Repositorys
             cmd.Parameters.AddWithValue("@CreateDate", dateTimeVariable);
             cmd.ExecuteNonQuery();
         }
-    }
 
+        public LogModelList SelectLogListAll()
+        {
+            var cs = "Server=localhost\\SQLEXPRESS;Database=HospitalDB;Trusted_Connection=True;";
+            using var con = new SqlConnection(cs);
+            con.Open();
+
+            string sql = "SELECT Id, Action, Target, CreateName, CreateDate FROM LogTbl";
+            using var cmd = new SqlCommand(sql, con);
+
+            using SqlDataReader rdr = cmd.ExecuteReader();
+
+            LogModelList output = new LogModelList();
+            output.Logtable = new List<LogModel>();
+
+            while (rdr.Read())
+            {
+                output.Logtable.Add(
+                    new LogModel()
+                    {
+                        Id = rdr.GetInt32(0),
+                        Action = rdr.GetString(1),
+                        Target = rdr.GetString(2),
+                        CreateName = rdr.GetString(3),
+                        CreateDate = rdr.GetDateTime(4),
+                    }
+                );
+            }
+            return output;
+        }
+
+    }
 
 }

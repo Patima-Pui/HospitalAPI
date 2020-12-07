@@ -113,15 +113,24 @@ namespace HospitalAPI.Controllers
         {
             ResposeModel result = _userService.DeleteProfile(requestDelete);
 
-             LogModel logmodel = new LogModel()
+            LogModel logmodel = new LogModel()
             {
                 Action = "Delete",
                 Target = requestDelete.Username,
-                CreateName =  requestDelete.DeleteName
+                CreateName = requestDelete.DeleteName
             };
             _logService.CreateLog(logmodel);
 
-            return result; 
+            return result;
         }
+
+        [HttpGet]
+        [Route("SelectLog")]
+        public LogModelList SelectLog()
+        {
+            LogModelList result = _logService.SelectLogList();
+            return result;
+        }
+        
     }
 }

@@ -6,6 +6,7 @@ namespace HospitalAPI.Services
     public interface ILogService
     {
         void CreateLog(LogModel requestdata);
+        LogModelList SelectLogList();
     }
     
     public class LogService : ILogService
@@ -22,6 +23,13 @@ namespace HospitalAPI.Services
         {
             _logRepository.InsertLog(requestdata);
         }
+
+          public LogModelList SelectLogList()
+        {
+            LogModelList result = _logRepository.SelectLogListAll();
+            return result;
+        }
+
     }
 
 }
