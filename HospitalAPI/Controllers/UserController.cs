@@ -35,7 +35,7 @@ namespace HospitalAPI.Controllers
             LogModel logmodel = new LogModel()
             {
                 Action = "Register",
-                Target = item.username,
+                TargetName = item.username,
                 CreateName = item.upSertName
             };
             _logService.CreateLog(logmodel);
@@ -52,7 +52,7 @@ namespace HospitalAPI.Controllers
             LogModel logmodel = new LogModel()
             {
                 Action = "Add",
-                Target = item.username,
+                TargetName = item.username,
                 CreateName = item.upSertName
             };
             _logService.CreateLog(logmodel);
@@ -100,7 +100,7 @@ namespace HospitalAPI.Controllers
             LogModel logmodel = new LogModel()
             {
                 Action = "Edit",
-                Target = request.username,
+                TargetName = request.username,
                 CreateName = request.upSertName
             };
             _logService.CreateLog(logmodel);
@@ -116,7 +116,7 @@ namespace HospitalAPI.Controllers
             LogModel logmodel = new LogModel()
             {
                 Action = "Delete",
-                Target = requestDelete.Username,
+                TargetName = requestDelete.Username,
                 CreateName = requestDelete.DeleteName
             };
             _logService.CreateLog(logmodel);
@@ -124,13 +124,5 @@ namespace HospitalAPI.Controllers
             return result;
         }
 
-        [HttpGet]
-        [Route("SelectLog")]
-        public LogModelList SelectLog()
-        {
-            LogModelList result = _logService.SelectLogList();
-            return result;
-        }
-        
     }
 }

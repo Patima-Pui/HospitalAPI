@@ -7,7 +7,7 @@ namespace HospitalAPI
     {
         public int Id { get; set; }
         public string Action { get; set; }
-        public string Target { get; set; }
+        public string TargetName { get; set; }
         public string CreateName { get; set; }
         public DateTime CreateDate { get; set; }
     }
@@ -15,5 +15,11 @@ namespace HospitalAPI
     public class LogModelList
     {
         public List<LogModel> Logtable { get; set; }
+    }
+
+    public class SearchLogModel : LogModel
+    {
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
     }
 }
