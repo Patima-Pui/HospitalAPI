@@ -22,10 +22,10 @@ namespace HospitalAPI.Repositorys
 
             DateTime dateTimeVariable = DateTime.Now;
             SqlCommand cmd = new SqlCommand(@"INSERT INTO LogTbl (
-                    Action, Target, CreateName, CreateDate) VALUES (
-                    @Action, @Target, @CreateName, @CreateDate)", con);
+                    Action, TargetName, CreateName, CreateDate) VALUES (
+                    @Action, @TargetName, @CreateName, @CreateDate)", con);
             cmd.Parameters.AddWithValue("@Action", request.Action);
-            cmd.Parameters.AddWithValue("@Target", request.TargetName);
+            cmd.Parameters.AddWithValue("@TargetName", request.TargetName);
             cmd.Parameters.AddWithValue("@CreateName", request.CreateName);
             cmd.Parameters.AddWithValue("@CreateDate", dateTimeVariable);
             cmd.ExecuteNonQuery();
