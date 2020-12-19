@@ -7,7 +7,7 @@ namespace HospitalAPI.Repositorys
     {
         RoleModelList SelectRolesAll();
         PermissionModelList SelectPermissionAll();
-        PermissionByIdModelList SelectPermissionIdAll(RoleByIdModel requestId);
+        PermissionByIdModelList SelectPermissionsByRoleId(RoleByIdModel requestId);
     }
 
     public class RolesRepository : IRolesRepository
@@ -68,31 +68,27 @@ namespace HospitalAPI.Repositorys
             return output;
         }
 
-        public PermissionByIdModelList SelectPermissionIdAll(RoleByIdModel requestId)
+        public PermissionByIdModelList SelectPermissionsByRoleId(RoleByIdModel requestId)
         {
             var cs = "Server=localhost\\SQLEXPRESS;Database=HospitalDB;Trusted_Connection=True;";
             using var con = new SqlConnection(cs);
             con.Open();
 
-            string sql = string.Format(@"SELECT RoleId , PermissionId FROM RolePermissionTbl 
-                        WHERE RoleId  = {0}", requestId.id);
+            string sql = string.Format(@"SELECT PermissionId FROM RolePermissionTbl 
+                        WHERE RoleId  = {0}", requestId.roleId);
 
             using var cmd = new SqlCommand(sql, con);
 
             using SqlDataReader rdr = cmd.ExecuteReader();
 
             PermissionByIdModelList output = new PermissionByIdModelList();
-            output.PermissionIdtable = new List<PermissionByIdModel>();
+            output.PermissionIdList = new List<int>();
 
             while (rdr.Read())
 
             {
-                output.PermissionIdtable.Add(
-                    new PermissionByIdModel()
-                    {
-                        roleId = rdr.GetInt32(0),
-                        permissionId = rdr.GetInt32(1)
-                    }
+                output.PermissionIdList.Add(
+                    rdr.GetInt32(0)
                 );
             }
             return output;
