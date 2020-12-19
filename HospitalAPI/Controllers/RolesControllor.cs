@@ -20,5 +20,13 @@ namespace HospitalAPI.Controllers
            RoleModelList result = _rolesService.SelectRoles();
            return result;
         }
+
+        [HttpGet]
+        [Route("PermissionAll")]
+        public PermissionModelList GetPermissionModelList()
+        {
+            PermissionModelList result = _rolesService.SelectPermissions();
+            return result;
+        }
     }
 }

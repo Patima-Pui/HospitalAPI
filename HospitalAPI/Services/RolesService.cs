@@ -5,6 +5,7 @@ namespace HospitalAPI.Services
     public interface IRolesService
     {
         RoleModelList SelectRoles();
+        PermissionModelList SelectPermissions();
     }
 
     public class RolesService : IRolesService
@@ -24,6 +25,10 @@ namespace HospitalAPI.Services
             return result;
         }
 
-        
+        public PermissionModelList SelectPermissions()
+        {
+            PermissionModelList result = _rolesRepository.SelectPermissiomAll();
+            return result;
+        }
     }
 }
