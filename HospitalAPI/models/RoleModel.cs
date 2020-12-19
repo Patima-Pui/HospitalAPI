@@ -15,7 +15,7 @@ namespace HospitalAPI
 
     public class PermissionModel
     {
-        public int id { get; set; }
+        public int permissionId { get; set; }
         public string permission { get; set; }
     }
 
@@ -31,10 +31,12 @@ namespace HospitalAPI
     public class PermissionByIdModel
     {
         public int permissionId { get; set; }
+        public string permissionName  { get; set; }
+        public bool permissionCheck { get; set; }
     }
 
     public class PermissionByIdModelList
     {
-        public List<int> PermissionIdList { get; set; }
+        public List<PermissionByIdModel> PermissionIdList { get; set; }
     }
 }

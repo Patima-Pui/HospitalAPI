@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using HospitalAPI.Repositorys;
 
 namespace HospitalAPI.Services
@@ -34,7 +35,23 @@ namespace HospitalAPI.Services
 
         public PermissionByIdModelList SelectPermissionsById(RoleByIdModel requestId)
         {
-            PermissionByIdModelList result = _rolesRepository.SelectPermissionsByRoleId(requestId);
+            List<int> rolePermission = _rolesRepository.SelectRolePermissionByRoleId(requestId);
+            PermissionModelList permission = _rolesRepository.SelectPermissionAll();
+
+            PermissionByIdModelList result = new PermissionByIdModelList();
+            result.PermissionIdList = new List<PermissionByIdModel>();
+
+            foreach(PermissionModel item in permission.Permissiontable) {
+                result.PermissionIdList.Add(
+                    new PermissionByIdModel() {
+                        permissionId = item.permissionId,   //PermisdionTbl
+                        permissionName = item.permission,   //PermisdionTbl    
+                        permissionCheck = rolePermission.IndexOf(item.permissionId) >= 0 ? true : false     
+                        //Search PermissionId(PermissionTbl) on RolePermisdion(RolePermissionTbl)
+                    }
+                );
+            }
+
             return result;
         }
     }
