@@ -33,6 +33,8 @@ namespace HospitalAPI
             services.AddTransient<IPatientService, PatientService>();
             services.AddTransient<ILogService, LogService>();
             services.AddTransient<ILogRepository, LogRepository>();
+            services.AddTransient<IRolesService, RolesService>();
+            services.AddTransient<IRolesRepository, RolesRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
