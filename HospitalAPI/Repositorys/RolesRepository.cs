@@ -6,7 +6,8 @@ namespace HospitalAPI.Repositorys
     public interface IRolesRepository
     {
         RoleModelList SelectRolesAll();
-        PermissionModelList SelectPermissiomAll();
+        PermissionModelList SelectPermissionAll();
+        PermissionByIdModelList SelectPermissionIdAll(RoleByIdModel requestId);
     }
 
     public class RolesRepository : IRolesRepository
@@ -39,7 +40,7 @@ namespace HospitalAPI.Repositorys
             return output;
         }
 
-        public PermissionModelList SelectPermissiomAll()
+        public PermissionModelList SelectPermissionAll()
         {
             var cs = "Server=localhost\\SQLEXPRESS;Database=HospitalDB;Trusted_Connection=True;";
             using var con = new SqlConnection(cs); //Using Class SqlConnection for COnnent to database
@@ -60,7 +61,37 @@ namespace HospitalAPI.Repositorys
                     new PermissionModel()
                     {
                         id = rdr.GetInt32(0),
-                        permission = rdr.GetString(1),
+                        permission = rdr.GetString(1)
+                    }
+                );
+            }
+            return output;
+        }
+
+        public PermissionByIdModelList SelectPermissionIdAll(RoleByIdModel requestId)
+        {
+            var cs = "Server=localhost\\SQLEXPRESS;Database=HospitalDB;Trusted_Connection=True;";
+            using var con = new SqlConnection(cs);
+            con.Open();
+
+            string sql = string.Format(@"SELECT RoleId , PermissionId FROM RolePermissionTbl 
+                        WHERE RoleId  = {0}", requestId.id);
+
+            using var cmd = new SqlCommand(sql, con);
+
+            using SqlDataReader rdr = cmd.ExecuteReader();
+
+            PermissionByIdModelList output = new PermissionByIdModelList();
+            output.PermissionIdtable = new List<PermissionByIdModel>();
+
+            while (rdr.Read())
+
+            {
+                output.PermissionIdtable.Add(
+                    new PermissionByIdModel()
+                    {
+                        roleId = rdr.GetInt32(0),
+                        permissionId = rdr.GetInt32(1)
                     }
                 );
             }

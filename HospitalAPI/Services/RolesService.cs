@@ -6,6 +6,7 @@ namespace HospitalAPI.Services
     {
         RoleModelList SelectRoles();
         PermissionModelList SelectPermissions();
+        PermissionByIdModelList SelectPermissionsById(RoleByIdModel requestId);
     }
 
     public class RolesService : IRolesService
@@ -27,7 +28,13 @@ namespace HospitalAPI.Services
 
         public PermissionModelList SelectPermissions()
         {
-            PermissionModelList result = _rolesRepository.SelectPermissiomAll();
+            PermissionModelList result = _rolesRepository.SelectPermissionAll();
+            return result;
+        }
+
+        public PermissionByIdModelList SelectPermissionsById(RoleByIdModel requestId)
+        {
+            PermissionByIdModelList result = _rolesRepository.SelectPermissionIdAll(requestId);
             return result;
         }
     }
