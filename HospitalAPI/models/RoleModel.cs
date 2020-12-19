@@ -16,7 +16,7 @@ namespace HospitalAPI
     public class PermissionModel
     {
         public int permissionId { get; set; }
-        public string permission { get; set; }
+        public string permissionName { get; set; }
     }
 
     public class PermissionModelList

@@ -45,7 +45,7 @@ namespace HospitalAPI.Services
                 result.PermissionIdList.Add(
                     new PermissionByIdModel() {
                         permissionId = item.permissionId,   //PermisdionTbl
-                        permissionName = item.permission,   //PermisdionTbl    
+                        permissionName = item.permissionName,   //PermisdionTbl    
                         permissionCheck = rolePermission.IndexOf(item.permissionId) >= 0 ? true : false     
                         //Search PermissionId(PermissionTbl) on RolePermisdion(RolePermissionTbl)
                     }

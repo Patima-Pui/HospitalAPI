@@ -61,7 +61,7 @@ namespace HospitalAPI.Repositorys
                     new PermissionModel()
                     {
                         permissionId = rdr.GetInt32(0),
-                        permission = rdr.GetString(1)
+                        permissionName = rdr.GetString(1)
                     }
                 );
             }
