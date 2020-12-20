@@ -39,11 +39,11 @@ namespace HospitalAPI.Services
             PermissionModelList permission = _rolesRepository.SelectPermissionAll();
 
             PermissionByIdModelList result = new PermissionByIdModelList();
-            result.PermissionIdList = new List<PermissionByIdModel>();
+            result.PermissionIdList = new List<PermissionModel>();
 
             foreach(PermissionModel item in permission.Permissiontable) {
                 result.PermissionIdList.Add(
-                    new PermissionByIdModel() {
+                    new PermissionModel() {
                         permissionId = item.permissionId,   //PermisdionTbl
                         permissionName = item.permissionName,   //PermisdionTbl    
                         permissionCheck = rolePermission.IndexOf(item.permissionId) >= 0 ? true : false     
