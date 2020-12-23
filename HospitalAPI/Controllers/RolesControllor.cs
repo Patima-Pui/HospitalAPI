@@ -36,5 +36,13 @@ namespace HospitalAPI.Controllers
             PermissionByIdModelList result = _rolesService.SelectPermissionsById(requestId);
             return result;
         }
+
+        [HttpPost]
+        [Route("InsertRole")]
+        public RoleResponseModel InsertRole([FromBody] UpsertRoleModel request)
+        {
+            RoleResponseModel result = _rolesService.InsertRoleService(request);
+            return result;
+        }
     }
 }
