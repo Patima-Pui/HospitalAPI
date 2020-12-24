@@ -13,6 +13,13 @@ namespace HospitalAPI
         public List<RoleModel> Roletable { get; set; }
     }
 
+    public class PermissionModel
+    {
+        public int permissionId { get; set; }
+        public string permissionName { get; set; }
+        public bool permissionCheck { get; set; }
+    }
+
     public class PermissionModelList
     {
         public List<PermissionModel> Permissiontable { get; set; }
@@ -21,12 +28,6 @@ namespace HospitalAPI
     public class RoleByIdModel
     {
         public int roleId { get; set; }
-    }
-    public class PermissionModel
-    {
-        public int permissionId { get; set; }
-        public string permissionName  { get; set; }
-        public bool permissionCheck { get; set; }
     }
 
     public class PermissionByIdModelList
@@ -41,7 +42,7 @@ namespace HospitalAPI
         public List<PermissionModel> permissionList { get; set; }
     }
 
-    public class RoleResponseModel 
+    public class RoleResponseModel
     {
         public bool success { get; set; }
     }
