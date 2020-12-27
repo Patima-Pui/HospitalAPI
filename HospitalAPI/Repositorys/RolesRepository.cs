@@ -11,6 +11,7 @@ namespace HospitalAPI.Repositorys
         List<int> SelectRolePermissionByRoleId(RoleByIdModel requestId);
         bool NewRoleAttribute(InsertRoleModel request);
         int InsertRolePermission(int roleId, List<PermissionModel> request);
+        int DeleteRole(int roleId);
         int DeleteRolePermission(int roleId);
 
     }

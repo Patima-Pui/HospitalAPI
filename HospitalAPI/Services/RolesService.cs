@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using HospitalAPI.Repositorys;
 
@@ -10,6 +11,7 @@ namespace HospitalAPI.Services
         PermissionByIdModelList SelectPermissionsById(RoleByIdModel requestId);
         RoleResponseModel InsertRoleService(InsertRoleModel request);
         RoleResponseModel UpdateRoleService(UpdateRoleModel request);
+        RoleResponseModel DeleteRoleService(RoleByIdModel requestId);
     }
 
     public class RolesService : IRolesService
@@ -78,7 +80,7 @@ namespace HospitalAPI.Services
         {
             RoleResponseModel response = new RoleResponseModel();
             var resDelete = _rolesRepository.DeleteRolePermission(request.roleId);
-           
+
             if (resDelete > 0)
             {
                 var resUpdate = 0;
@@ -98,6 +100,37 @@ namespace HospitalAPI.Services
             }
 
             return response;
+        }
+
+        public RoleResponseModel DeleteRoleService(RoleByIdModel requestId)
+        {
+            try
+            {
+                RoleResponseModel response = new RoleResponseModel();
+                var resRolePermission = _rolesRepository.DeleteRolePermission(requestId.roleId);
+                if (resRolePermission > 0)
+                {
+                    var resRole = _rolesRepository.DeleteRole(requestId.roleId);
+                    if (resRole > 0)
+                    {
+                        response.success = true;
+                    }
+                    else
+                    {
+                        response.success = false;
+                    }
+                }
+                else
+                {
+                    response.success = false;
+                }
+                return response;
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine("Error: " + error);
+                return new RoleResponseModel() {success = false};
+            }
         }
     }
 }

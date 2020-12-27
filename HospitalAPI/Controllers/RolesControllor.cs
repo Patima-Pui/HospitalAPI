@@ -52,5 +52,13 @@ namespace HospitalAPI.Controllers
             RoleResponseModel result = _rolesService.UpdateRoleService(request);
             return result;
         }
+
+        [HttpDelete]
+        [Route("DeleteRole")]
+        public RoleResponseModel DeleteRole([FromQuery]RoleByIdModel requestId)
+        {
+            RoleResponseModel result = _rolesService.DeleteRoleService(requestId);
+            return result;
+        }
     }
 }
