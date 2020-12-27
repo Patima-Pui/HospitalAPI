@@ -39,9 +39,17 @@ namespace HospitalAPI.Controllers
 
         [HttpPost]
         [Route("InsertRole")]
-        public RoleResponseModel InsertRole([FromBody] UpsertRoleModel request)
+        public RoleResponseModel InsertRole([FromBody] InsertRoleModel request)
         {
             RoleResponseModel result = _rolesService.InsertRoleService(request);
+            return result;
+        }
+
+        [HttpPut]
+        [Route("UpdateRole")]
+        public RoleResponseModel UpdateRole([FromBody] UpdateRoleModel request)
+        {
+            RoleResponseModel result = _rolesService.UpdateRoleService(request);
             return result;
         }
     }

@@ -8,7 +8,8 @@ namespace HospitalAPI.Services
         RoleModelList SelectRoles();
         PermissionModelList SelectPermissions();
         PermissionByIdModelList SelectPermissionsById(RoleByIdModel requestId);
-        RoleResponseModel InsertRoleService(UpsertRoleModel request);
+        RoleResponseModel InsertRoleService(InsertRoleModel request);
+        RoleResponseModel UpdateRoleService(UpdateRoleModel request);
     }
 
     public class RolesService : IRolesService
@@ -58,7 +59,7 @@ namespace HospitalAPI.Services
             return result;
         }
 
-        public RoleResponseModel InsertRoleService(UpsertRoleModel request)
+        public RoleResponseModel InsertRoleService(InsertRoleModel request)
         {
             RoleResponseModel response = new RoleResponseModel();
             var result = _rolesRepository.NewRoleAttribute(request);
@@ -70,6 +71,32 @@ namespace HospitalAPI.Services
             {
                 response.success = false;
             }
+            return response;
+        }
+
+        public RoleResponseModel UpdateRoleService(UpdateRoleModel request)
+        {
+            RoleResponseModel response = new RoleResponseModel();
+            var resDelete = _rolesRepository.DeleteRolePermission(request.roleId);
+           
+            if (resDelete > 0)
+            {
+                var resUpdate = 0;
+                resUpdate = _rolesRepository.InsertRolePermission(request.roleId, request.permissionList);
+                if (resUpdate > 0)
+                {
+                    response.success = true;
+                }
+                else
+                {
+                    response.success = false;
+                }
+            }
+            else
+            {
+                response.success = false;
+            }
+
             return response;
         }
     }

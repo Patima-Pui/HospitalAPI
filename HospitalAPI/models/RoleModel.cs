@@ -35,11 +35,27 @@ namespace HospitalAPI
         public List<PermissionModel> PermissionIdList { get; set; }
     }
 
-    public class UpsertRoleModel //Request from frontEnd to backEnd
+    // public class UpsertRoleModel //Request from frontEnd to backEnd
+    // {
+    //     public string roleName { get; set; }
+    //     public string username { get; set; }
+    //     public List<PermissionModel> permissionList { get; set; }
+    // }
+
+    public class RequestRoleModel
     {
-        public string roleName { get; set; }
         public string username { get; set; }
         public List<PermissionModel> permissionList { get; set; }
+    }
+
+    public class InsertRoleModel : RequestRoleModel
+    {
+        public string roleName { get; set; }
+    }
+
+    public class UpdateRoleModel : RequestRoleModel
+    {
+        public int roleId { get; set; }
     }
 
     public class RoleResponseModel

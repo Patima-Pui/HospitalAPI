@@ -9,7 +9,9 @@ namespace HospitalAPI.Repositorys
         RoleModelList SelectRolesAll();
         PermissionModelList SelectPermissionAll();
         List<int> SelectRolePermissionByRoleId(RoleByIdModel requestId);
-        bool NewRoleAttribute(UpsertRoleModel request);
+        bool NewRoleAttribute(InsertRoleModel request);
+        int InsertRolePermission(int roleId, List<PermissionModel> request);
+        int DeleteRolePermission(int roleId);
 
     }
 
@@ -95,7 +97,7 @@ namespace HospitalAPI.Repositorys
             return output;
         }
 
-        public bool NewRoleAttribute(UpsertRoleModel request)
+        public bool NewRoleAttribute(InsertRoleModel request)
         {
             try
             {
@@ -105,7 +107,7 @@ namespace HospitalAPI.Repositorys
 
                 if (roleId >= 0)
                 {
-                    resRolePermisison = InsertRolePermission(roleId, request);
+                    resRolePermisison = InsertRolePermission(roleId, request.permissionList);
                 }
 
                 if (resRole == 1 && resRolePermisison == 0)
@@ -184,7 +186,7 @@ namespace HospitalAPI.Repositorys
             }
         }
 
-        public int InsertRolePermission(int roleId, UpsertRoleModel request)
+        public int InsertRolePermission(int roleId, List<PermissionModel> request)
         {
             try
             {
@@ -195,7 +197,7 @@ namespace HospitalAPI.Repositorys
                 string sqlValueInsert = "";
 
                 //Permission on this role
-                foreach (PermissionModel item in request.permissionList)
+                foreach (PermissionModel item in request)
                 {
                     if (item.permissionCheck)
                     {
@@ -239,5 +241,26 @@ namespace HospitalAPI.Repositorys
             }
         }
 
+        public int DeleteRolePermission(int roleId)
+        {
+            try
+            {
+                var cs = "Server=localhost\\SQLEXPRESS;Database=HospitalDB;Trusted_Connection=True;";
+                using var con = new SqlConnection(cs);
+                con.Open();
+
+                string sql = string.Format(@"DELETE FROM RolePermissionTbl WHERE RoleId = {0}", roleId);
+
+                using var cmd = new SqlCommand(sql, con);
+
+                var res = cmd.ExecuteNonQuery();
+                return res;
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine("Error: " + error);
+                return 0;
+            }
+        }
     }
 }
