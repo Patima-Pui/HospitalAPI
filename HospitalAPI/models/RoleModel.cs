@@ -25,6 +25,12 @@ namespace HospitalAPI
         public List<PermissionModel> Permissiontable { get; set; }
     }
 
+    public class PermissionByUserIdModelList
+    {
+        public string role { get; set; }
+        public List<PermissionModel> permissions { get; set; }
+    }
+
     public class RoleByIdModel
     {
         public int roleId { get; set; }

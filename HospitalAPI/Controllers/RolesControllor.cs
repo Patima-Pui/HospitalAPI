@@ -60,5 +60,13 @@ namespace HospitalAPI.Controllers
             RoleResponseModel result = _rolesService.DeleteRoleService(requestId);
             return result;
         }
+
+        [HttpGet]
+        [Route("PermissionByUserId")]
+        public PermissionByUserIdModelList GetPermissionsByUserId([FromQuery] UserRequestIdModel userId)
+        {
+            PermissionByUserIdModelList result = _rolesService.SelectPermisionByUserId(userId);
+            return result;
+        }
     }
 }

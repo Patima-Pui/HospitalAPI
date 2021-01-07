@@ -16,6 +16,7 @@ namespace HospitalAPI.Repositorys
         int UpdateUserProfile(UserProfileModel item);
         DropdownDepartmentListModel SelectDepaertmentFromDB();
         int DeleteProfileRopo(RequestDeleteModel requestDelete);
+        RoleModel SelectRoleIdByUserId(UserRequestIdModel userId);
     }
 
     public class UserRepository : IUserRepository
@@ -261,6 +262,31 @@ namespace HospitalAPI.Repositorys
 
             var res = cmd.ExecuteNonQuery();
             return res;
+        }
+
+        public RoleModel SelectRoleIdByUserId(UserRequestIdModel userId)
+        {
+            var cs = "Server=localhost\\SQLEXPRESS;Database=HospitalDB;Trusted_Connection=True;";
+            using var con = new SqlConnection(cs);
+            con.Open();
+
+            string query = string.Format(@"SELECT a.RoleId, b.Role
+                                    FROM UserTbl a LEFT JOIN RoleTbl b
+                                    ON a.RoleId = b.Id WHERE a.[Id] = {0}
+                                    ", userId.Id);
+
+            using var cmd = new SqlCommand(query, con); //Using Class SqlCommand for query data
+
+            using SqlDataReader rdr = cmd.ExecuteReader();
+
+            RoleModel output = new RoleModel();
+
+            while (rdr.Read())
+            {
+                output.id = rdr.GetInt32(0);
+                output.role = rdr.GetString(1);
+            };
+            return output;
         }
 
     }

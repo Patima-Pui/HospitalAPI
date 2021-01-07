@@ -12,16 +12,19 @@ namespace HospitalAPI.Services
         RoleResponseModel InsertRoleService(InsertRoleModel request);
         RoleResponseModel UpdateRoleService(UpdateRoleModel request);
         RoleResponseModel DeleteRoleService(RoleByIdModel requestId);
+        PermissionByUserIdModelList SelectPermisionByUserId(UserRequestIdModel userId);
     }
 
     public class RolesService : IRolesService
     {
         private IRolesRepository _rolesRepository;
+        private IUserRepository _userRepository;
 
         //Create constructor
-        public RolesService(IRolesRepository rolesRepository)
+        public RolesService(IRolesRepository rolesRepository, IUserRepository userRepository)
         {
             _rolesRepository = rolesRepository;
+            _userRepository = userRepository;
         }
 
         //Create Method
@@ -58,6 +61,39 @@ namespace HospitalAPI.Services
                 );
             }
 
+            return result;
+        }
+
+        public PermissionByUserIdModelList SelectPermisionByUserId(UserRequestIdModel userId)
+        {
+            // userRepository ดึงข้อมูล role id, role name โดย ส่ง user id ไปหา ต้อง join กับ table role ด้วยนะ
+            RoleModel roldInfo = _userRepository.SelectRoleIdByUserId(userId);
+            RoleByIdModel roleByIdModel = new RoleByIdModel();
+            roleByIdModel.roleId = roldInfo.id;
+            // roleByIdModel.roleId = 1;
+            // roleRepository ดึงข้อมูล permision โดยส่ง role id
+            List<int> rolePermission = _rolesRepository.SelectRolePermissionByRoleId(roleByIdModel);
+                        
+            PermissionModelList permission = _rolesRepository.SelectPermissionAll();
+
+            PermissionByUserIdModelList result = new PermissionByUserIdModelList();
+
+            // result.role = "Admin";
+            result.role = roldInfo.role;
+            result.permissions = new List<PermissionModel>();
+
+            foreach (PermissionModel item in permission.Permissiontable)
+            {
+                result.permissions.Add(
+                    new PermissionModel()
+                    {
+                        permissionId = item.permissionId,   //PermisdionTbl
+                        permissionName = item.permissionName,   //PermisdionTbl    
+                        permissionCheck = rolePermission.IndexOf(item.permissionId) >= 0 ? true : false
+                    }
+                );
+            }
+ 
             return result;
         }
 
@@ -129,7 +165,7 @@ namespace HospitalAPI.Services
             catch (Exception error)
             {
                 Console.WriteLine("Error: " + error);
-                return new RoleResponseModel() {success = false};
+                return new RoleResponseModel() { success = false };
             }
         }
     }
