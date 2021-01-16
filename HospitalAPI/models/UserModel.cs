@@ -25,7 +25,7 @@ namespace HospitalAPI
         public string name { get; set; }
         public string surname { get; set; }
         public DateTime createdate { get; set; }
-
+        public string roleName { get; set; }
     }
 
     public class UserModelList

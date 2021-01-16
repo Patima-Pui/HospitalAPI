@@ -103,7 +103,9 @@ namespace HospitalAPI.Repositorys
             using var con = new SqlConnection(cs); //Using Class SqlConnection for COnnent to database
             con.Open();
 
-            string sql = string.Format(@"SELECT Id, Username, Name, Surname, CreateDate FROM UserTbl WHERE (Name LIKE '%{0}%' OR Surname LIKE '%{0}%' OR Username LIKE '%{0}%')
+            string sql = string.Format(@"SELECT a.Id, a.Username, a.Name, a.Surname, a.CreateDate, b.Role
+                            FROM UserTbl a LEFT JOIN RoleTbl b ON a.RoleId = b.Id
+                            WHERE (a.Name LIKE '%{0}%' OR a.Surname LIKE '%{0}%' OR a.Username LIKE '%{0}%')
                         ", requestSerach.SearchText);
 
             using var cmd = new SqlCommand(sql, con); //Using Class SqlCommand for query data
@@ -124,6 +126,7 @@ namespace HospitalAPI.Repositorys
                          name = rdr.GetString(2),
                          surname = rdr.GetString(3),
                          createdate = rdr.GetDateTime(4),
+                         roleName = rdr.GetString(5)
                      }
                  );
             }
