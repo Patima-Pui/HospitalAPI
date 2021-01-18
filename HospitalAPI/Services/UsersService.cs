@@ -72,23 +72,32 @@ namespace HospitalAPI.Services
         {
             ResposeModel response = new ResposeModel();
 
+            var result = _userRepository.checkDuplicateUsername(item.username);
+            if (result == 0)
+            {
+                var res = _userRepository.InsertDataForRegister(item);
+                if (res == 1)
+                {
+                    response.success = true;
+                }
+                else
+                {
+                    response.success = false;
+                    response.message = "Insert Fail.";
+                }
+
+            }
+            else
+            {
+                response.success = false;
+                response.message = "Duplicate Username.";
+            }
+            return response;
             // เขียนการเช็ค username ซ้ำ
             // repository "checkDuplicateUsername(username)"
             // return 0 หรือ 1
             // ถ้าหาเจอ (1) response.success = false; และ response.message = "Duplicate Username."
             // ถ้าหาไม่เจอ (0) response.success = true;
-
-            var result = _userRepository.InsertDataForRegister(item);
-            if (result == 1)
-            {
-                response.success = true;
-            }
-            else
-            {
-                response.success = false;
-            }
-
-            return response;
         }
 
         public UserProfileModel SelectIndividual(UserRequestIdModel requestId)
@@ -135,8 +144,8 @@ namespace HospitalAPI.Services
 
             return response;
             // return result;
-        }   
-             
+        }
+
     }
 
 }

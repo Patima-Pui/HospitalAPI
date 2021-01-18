@@ -17,8 +17,7 @@ namespace HospitalAPI.Repositorys
         DropdownDepartmentListModel SelectDepaertmentFromDB();
         int DeleteProfileRopo(RequestDeleteModel requestDelete);
         RoleModel SelectRoleIdByUserId(UserRequestIdModel userId);
-
-        //checkDuplicateUsername
+        int checkDuplicateUsername(string username);
     }
 
     public class UserRepository : IUserRepository
@@ -294,17 +293,27 @@ namespace HospitalAPI.Repositorys
             return output;
         }
 
-        public int checkDuplicateUsername(string username) {
+        public int checkDuplicateUsername(string username)
+        {
 
             // SQL  สำหรับหาข้อมูล โดยใส่เงื่อนหา username
+            var cs = "Server=localhost\\SQLEXPRESS;Database=HospitalDB;Trusted_Connection=True;";
+            using var con = new SqlConnection(cs);
+            con.Open();
 
-            // SELECT COUNT(column_name)
-            // FROM table_name
-            // WHERE condition;
+            string query = string.Format(@"SELECT COUNT(Id) FROM UserTbl WHERE Username = '{0}'", username);
 
-            // rdr.GetInt32(0) เป็น 0 หรือ 1 แล้วก็ return ออกไป
+            using var cmd = new SqlCommand(query, con);
 
-            return 0;
+            using SqlDataReader rdr = cmd.ExecuteReader();
+
+            int output = -1;
+
+            while (rdr.Read())
+            {
+                output = rdr.GetInt32(0);
+            };
+            return output;
         }
 
     }

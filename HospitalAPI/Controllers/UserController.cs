@@ -31,15 +31,17 @@ namespace HospitalAPI.Controllers
         public ResposeModel Register([FromBody] UserProfileModel item)
         {
             ResposeModel result = _userService.UserProfile(item);
-
-            LogModel logmodel = new LogModel()
+            if (result.success) // if (result.success == true)
             {
-                Action = "Register",
-                TargetName = item.username,
-                CreateName = item.upSertName
-            };
-            _logService.CreateLog(logmodel);
+                LogModel logmodel = new LogModel()
+                {
+                    Action = "Register",
+                    TargetName = item.username,
+                    CreateName = item.upSertName
+                };
+                _logService.CreateLog(logmodel);
 
+            }
             return result;
         }
 
