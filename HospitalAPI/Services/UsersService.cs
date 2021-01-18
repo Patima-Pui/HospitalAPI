@@ -71,6 +71,13 @@ namespace HospitalAPI.Services
         public ResposeModel UserProfile(UserProfileModel item)
         {
             ResposeModel response = new ResposeModel();
+
+            // เขียนการเช็ค username ซ้ำ
+            // repository "checkDuplicateUsername(username)"
+            // return 0 หรือ 1
+            // ถ้าหาเจอ (1) response.success = false; และ response.message = "Duplicate Username."
+            // ถ้าหาไม่เจอ (0) response.success = true;
+
             var result = _userRepository.InsertDataForRegister(item);
             if (result == 1)
             {

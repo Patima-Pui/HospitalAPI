@@ -17,6 +17,8 @@ namespace HospitalAPI.Repositorys
         DropdownDepartmentListModel SelectDepaertmentFromDB();
         int DeleteProfileRopo(RequestDeleteModel requestDelete);
         RoleModel SelectRoleIdByUserId(UserRequestIdModel userId);
+
+        //checkDuplicateUsername
     }
 
     public class UserRepository : IUserRepository
@@ -290,6 +292,19 @@ namespace HospitalAPI.Repositorys
                 output.role = rdr.GetString(1);
             };
             return output;
+        }
+
+        public int checkDuplicateUsername(string username) {
+
+            // SQL  สำหรับหาข้อมูล โดยใส่เงื่อนหา username
+
+            // SELECT COUNT(column_name)
+            // FROM table_name
+            // WHERE condition;
+
+            // rdr.GetInt32(0) เป็น 0 หรือ 1 แล้วก็ return ออกไป
+
+            return 0;
         }
 
     }

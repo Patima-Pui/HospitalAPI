@@ -39,6 +39,7 @@ namespace HospitalAPI
     public class ResposeModel
     {
         public bool success { get; set; }
+        public string message { get; set; }
     }
 
     public class ResposeLoginModel
