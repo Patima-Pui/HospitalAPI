@@ -90,14 +90,10 @@ namespace HospitalAPI.Services
             else
             {
                 response.success = false;
-                response.message = "Duplicate Username.";
+                response.message = "Username already exist.";
             }
             return response;
-            // เขียนการเช็ค username ซ้ำ
-            // repository "checkDuplicateUsername(username)"
-            // return 0 หรือ 1
-            // ถ้าหาเจอ (1) response.success = false; และ response.message = "Duplicate Username."
-            // ถ้าหาไม่เจอ (0) response.success = true;
+            
         }
 
         public UserProfileModel SelectIndividual(UserRequestIdModel requestId)
