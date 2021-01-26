@@ -30,12 +30,12 @@ namespace HospitalAPI.Repositorys
             using SqlDataReader rdr = cmd.ExecuteReader();
 
             RoleModelList output = new RoleModelList();
-            output.Roletable = new List<RoleModel>();
+            output.RoleList = new List<RoleModel>();
 
             while (rdr.Read())
 
             {
-                output.Roletable.Add(
+                output.RoleList.Add(
                     new RoleModel()
                     {
                         id = rdr.GetInt32(0),

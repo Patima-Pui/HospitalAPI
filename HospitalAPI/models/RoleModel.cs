@@ -10,7 +10,7 @@ namespace HospitalAPI
 
     public class RoleModelList
     {
-        public List<RoleModel> Roletable { get; set; }
+        public List<RoleModel> RoleList { get; set; }
     }
 
     public class PermissionModel

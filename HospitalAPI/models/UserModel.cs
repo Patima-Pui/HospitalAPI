@@ -66,6 +66,7 @@ namespace HospitalAPI
         public int departmentId { get; set; }
         public string departmentName { get; set; }
         public string upSertName { get; set; }
+        public int roleId { get; set; }
     }
 
     public class UserRequestIdModel

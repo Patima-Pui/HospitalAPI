@@ -140,7 +140,7 @@ namespace HospitalAPI.Repositorys
             using var con = new SqlConnection(cs);
             con.Open();
 
-            string sql = string.Format(@"SELECT a.Username, a.Name, a.Surname, a.Telephone, a.Email, a.DepartmentId, b.DepartmentName
+            string sql = string.Format(@"SELECT a.Username, a.Name, a.Surname, a.Telephone, a.Email, a.DepartmentId, a.RoleId, b.DepartmentName
                         FROM UserTbl a LEFT JOIN UserDepartment b
                         ON a.DepartmentId = b.Id WHERE a.[Id] = {0}
                         ", requestId.Id);
@@ -160,7 +160,8 @@ namespace HospitalAPI.Repositorys
                 output.telephone = rdr.GetString(3);
                 output.email = rdr.GetString(4);
                 output.departmentId = rdr.GetInt32(5);
-                output.departmentName = rdr.GetString(6);
+                output.roleId = rdr.GetInt32(6);
+                output.departmentName = rdr.GetString(7);
             }
             return output;
         }
@@ -173,9 +174,11 @@ namespace HospitalAPI.Repositorys
 
             DateTime dateTimeVariable = DateTime.Now;
             SqlCommand cmd = new SqlCommand(@"INSERT INTO UserTbl (
-                    Username, Password, Name, Surname, Telephone, Email, CreateDate, CreateName, UpdateDate, UpdateName,  DepartmentId
+                    Username, Password, Name, Surname, Telephone, Email, CreateDate, CreateName,
+                    UpdateDate, UpdateName,  DepartmentId, RoleId
                 ) VALUES (
-                    @Username, @Password, @Name, @Surname, @Telephone, @Email, @CreateDate, @CreateName, @UpdateDate, @UpdateName, @DepartmentId
+                    @Username, @Password, @Name, @Surname, @Telephone, @Email, @CreateDate, @CreateName, 
+                    @UpdateDate, @UpdateName, @DepartmentId, @RoleId
                 )", con);
             cmd.Parameters.AddWithValue("@Username", item.username);
             cmd.Parameters.AddWithValue("@Password", item.password);
@@ -188,7 +191,7 @@ namespace HospitalAPI.Repositorys
             cmd.Parameters.AddWithValue("@UpdateDate", dateTimeVariable);
             cmd.Parameters.AddWithValue("@UpdateName", item.upSertName);
             cmd.Parameters.AddWithValue("@DepartmentId", item.departmentId);
-
+            cmd.Parameters.AddWithValue("@RoleId", item.roleId);
             var res = cmd.ExecuteNonQuery();
             return res;
         }
@@ -237,7 +240,8 @@ namespace HospitalAPI.Repositorys
                 Email = @Email,
                 UpdateDate = @UpdateDate,
                 UpdateName = @UpdateName,
-                DepartmentId = @DepartmentId 
+                DepartmentId = @DepartmentId,
+                RoleId = @RoleId
                 WHERE Id = @Id;
                 ", con);
             cmd.Parameters.AddWithValue("@Id", item.id);
@@ -249,6 +253,7 @@ namespace HospitalAPI.Repositorys
             cmd.Parameters.AddWithValue("@UpdateDate", dateTimeVariable);
             cmd.Parameters.AddWithValue("@UpdateName", item.upSertName);
             cmd.Parameters.AddWithValue("@DepartmentId", item.departmentId);
+            cmd.Parameters.AddWithValue("@RoleId", item.roleId);
 
             var res = cmd.ExecuteNonQuery();
             return res;
