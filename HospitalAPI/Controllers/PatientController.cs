@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using HospitalAPI.Services;
 
+using System.Threading.Tasks;
+
 namespace HospitalAPI.Controllers
 {
     [ApiController]
@@ -40,6 +42,16 @@ namespace HospitalAPI.Controllers
             DropdownTypeModelList result = _patientService.TypeList();
             return result;
         }
-    }
 
+        [HttpGet]
+        [Route("Export")]
+        public async Task<IActionResult> GetExport([FromQuery] PatientModelRequest requestSerach)
+        {
+            var content = await _patientService.GetExport(requestSerach);
+
+            return File(content,
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "Company.xlsx");
+        }
+    }
 }
